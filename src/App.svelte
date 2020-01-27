@@ -3,9 +3,20 @@
   import Image from './image-com.svelte'
 	let word,
 	  send,
-	  images = [];
+    images = [];
+    function makeid(length) {
+   var result           = '';
+   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+   var charactersLength = characters.length;
+   for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   }
+   return result;
+}
+    let id = makeid(10)
+    console.log(id)
 	var gun = Gun("https://gun-matrix.herokuapp.com/gun");
-	var think = gun.get("main/" + location.hash.slice(1));
+	var think = gun.get("marvel/" + location.hash.slice(1));
 	console.log(think);
 	think.map().on((pics, id) => {
 	  images.push(pics);
@@ -17,7 +28,7 @@
   const file = document.querySelector('input[type=file]').files[0];
   const reader = new FileReader();
 
-  reader.addEventListener("load",() => { gun.get('main/' + location.hash.slice(1)).get(' ').put(reader.result)}, false);
+  reader.addEventListener("load",() => { gun.get('marvel/' + location.hash.slice(1)).get(id).put(reader.result)}, false);
 
   if (file) {
     reader.readAsDataURL(file);
