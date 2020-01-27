@@ -51,7 +51,8 @@
         <div class="masonry">
             {#each data as item}
             <div class="masonry-item">
-                <img src={item} alt="Dummy Image" class="masonry-content">
+                <img src={item.img} alt="Dummy Image" class="masonry-content">
+                <h2>{item.likes} likes</h2>
               </div>
             {/each}
   </div>
