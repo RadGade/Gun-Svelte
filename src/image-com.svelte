@@ -1,5 +1,9 @@
 <script>
-    export let data
+    export let data, id
+    import Gun from 'gun'
+    var gun = Gun('https://gun-matrix.herokuapp.com/gun', {radisk : true})
+    id = id
+    console.log(data);
 </script>
 <style>
     :global(body) {
@@ -47,14 +51,5 @@
     }
   </style>
   
-    <div class="masonry-wrapper">
-        <div class="masonry">
-            {#each data as item}
-            <div class="masonry-item">
-                <img src={item.img} alt="Dummy Image" class="masonry-content">
-                <h2>{item.likes} likes</h2>
-              </div>
-            {/each}
-  </div>
- </div>
+
   
