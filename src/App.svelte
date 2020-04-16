@@ -1,6 +1,11 @@
 <script>
   import Gun from 'gun'
+  import WebTorrent from 'webtorrent'
   import Image from './image-com.svelte'
+
+  var client = new WebTorrent()
+
+  
   let word,
     send,
     idea = []
@@ -15,8 +20,8 @@
     return result
   }
   let id = makeid(10)
-  var gun = Gun('https://gun-matrix.herokuapp.com/gun', { radisk: true })
-  var think = gun.get('lc/' + location.hash.slice(1))
+  var gun = Gun('https://gun-matrix.herokuapp.com/gun', { radisk: true, localStorage: false})
+  var think = gun.get('sex/' + location.hash.slice(1))
   think.map().on((pics, id) => {
     idea.push({ id, pics})
     for (let i = 0; i < idea.length; i++) {
@@ -33,7 +38,7 @@
       'load',
       () => {
         gun
-          .get('lc/' + location.hash.slice(1))
+          .get('sex/' + location.hash.slice(1))
           .get(id)
           .put({ img: reader.result, likes: 0 })
       },
@@ -95,22 +100,4 @@
 <input type="file" on:change={previewFile} />
 <br />
 
-<div class="masonry-wrapper">
-  <div class="masonry">
-    {#each idea as item}
-      <div class="masonry-item">
-        <img src={item.pics.img} alt="Dummy Image" class="masonry-content" />
-        <h1>{item.id}</h1>
-        <h1>{item.pics.likes}</h1>
-        <button
-          on:click={gun
-            .get('lc/' + location.hash.slice(1))
-            .get(item.id)
-            .get('likes')
-            .put(item.pics.likes + 1)}>
-          like
-        </button>
-      </div>
-    {/each}
-  </div>
-</div>
+<Image data = {idea} />

@@ -18,6 +18,11 @@
     "dev": "webpack-dev-server --content-base public"
   },
   "dependencies": {
-    "gun": "^0.2020.116"
+    "encoding-down": "^6.3.0",
+    "gun": "^0.2020.116",
+    "gun-level": "^6.0.4",
+    "leveldown": "^5.4.1",
+    "levelup": "^4.3.2",
+    "webtorrent": "^0.108.1"
   }
 }
